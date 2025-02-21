@@ -22,6 +22,31 @@
     </style>
 </head>
 <body>
-    <iframe src="https://justinonladyj.wixstudio.com/sitedemo" allowfullscreen></iframe>
+
+    <iframe id="wixFrame" src="https://yourname.wixsite.com/demo" allowfullscreen></iframe>
+
+    <script>
+        function removeWixBanner() {
+            let iframe = document.getElementById("wixFrame");
+
+            // Ensure the iframe is loaded before accessing its content
+            iframe.onload = function () {
+                try {
+                    let wixDoc = iframe.contentWindow.document;
+                    let wixBanner = wixDoc.querySelector("div[data-testid='banner']");
+                    
+                    if (wixBanner) {
+                        wixBanner.style.display = "none";
+                    }
+                } catch (error) {
+                    console.log("Wix iframe access is blocked due to cross-origin restrictions.");
+                }
+            };
+        }
+
+        // Delay the function to ensure the Wix site is fully loaded
+        setTimeout(removeWixBanner, 3000);
+    </script>
+
 </body>
 </html>
